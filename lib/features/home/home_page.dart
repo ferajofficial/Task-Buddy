@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
-const HomePage({ Key? key }) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context){
-    return HomeView();
+  Widget build(BuildContext context) {
+    return const HomeView();
   }
 }
+
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
