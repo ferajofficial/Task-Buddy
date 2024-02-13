@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:task_buddy/const/resource.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SigninOptions extends StatelessWidget {
@@ -57,7 +59,10 @@ class SigninOptions extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.facebook),
+                    SvgPicture.asset(
+                      R.ASSETS_ICONS_GOOGLE_SVG,
+                      height: 20,
+                    ),
                     Text(
                       "Google",
                       style: GoogleFonts.poppins(
@@ -83,9 +88,9 @@ class SigninOptions extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.facebook),
+                    SvgPicture.asset(R.ASSETS_ICONS_META_SVG, height: 20),
                     Text(
-                      "Facebook",
+                      "Meta",
                       style: GoogleFonts.poppins(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,

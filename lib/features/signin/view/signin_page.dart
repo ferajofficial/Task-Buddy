@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:task_buddy/const/resource.dart';
 import 'package:task_buddy/features/signin/constants/signin_options.dart';
 import 'package:task_buddy/shared/custom_form.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -34,7 +35,7 @@ class _SigninViewState extends State<SigninView> {
           children: [
             Align(
               alignment: Alignment.center,
-              child: SvgPicture.asset("assets/illustrations/signin.svg",
+              child: SvgPicture.asset(R.ASSETS_ILLUSTRATIONS_SIGNIN_SVG,
                   height: 220),
             ),
             30.heightBox,

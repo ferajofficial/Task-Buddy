@@ -246,6 +246,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_asset_generator:
+    dependency: "direct main"
+    description:
+      name: flutter_asset_generator
+      sha256: "885967c4265c7ade643fd81f815e11e7b82b48485844eb5baa68552162d97f3d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   flutter_bloc:
     dependency: "direct main"
     description:
