@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:task_buddy/const/resource.dart';
 import 'package:task_buddy/features/signin/constants/signin_options.dart';
+import 'package:task_buddy/shared/custom_button.dart';
 import 'package:task_buddy/shared/custom_form.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -51,12 +52,18 @@ class _SigninViewState extends State<SigninView> {
               "Good to see you again 😅",
               style: GoogleFonts.poppins(
                 fontSize: 15,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w500,
                 color: Colors.grey,
               ),
             ),
             20.heightBox,
-            const CustomForm(),
+            CustomForm(),
+            20.heightBox,
+            const CustomButton(
+              width: double.infinity,
+              height: 50,
+              buttonTxt: 'Sign in',
+            ),
             30.heightBox,
             Align(
               alignment: Alignment.center,

@@ -3,13 +3,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CustomForm extends StatelessWidget {
-  const CustomForm({
+  CustomForm({
     super.key,
   });
-
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Column(
         children: [
           TextFormField(
@@ -80,27 +81,6 @@ class CustomForm extends StatelessWidget {
             ),
           ),
           20.heightBox,
-          ElevatedButton(
-            onPressed: () {
-              // context.router.pushNamed('/home');
-            },
-            style: ElevatedButton.styleFrom(
-              elevation: 0,
-              backgroundColor: Colors.grey[800],
-              minimumSize: const Size(double.infinity, 50),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            child: Text(
-              "Sign In",
-              style: GoogleFonts.poppins(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-              ),
-            ),
-          ),
         ],
       ),
     );
