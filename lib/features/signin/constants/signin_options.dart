@@ -21,7 +21,7 @@ class SigninOptions extends StatelessWidget {
               color: Colors.grey,
               // indent: 50,
               // endIndent: 50,
-            ).w(130),
+            ).w(120),
             15.widthBox,
             Text(
               "Sign in with",
@@ -36,12 +36,12 @@ class SigninOptions extends StatelessWidget {
               color: Colors.grey,
               // indent: 50,
               // endIndent: 50,
-            ).w(130),
+            ).w(120),
           ],
         ),
         30.heightBox,
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             ElevatedButton(
                 onPressed: () {},
@@ -61,17 +61,17 @@ class SigninOptions extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       R.ASSETS_ICONS_GOOGLE_SVG,
-                      height: 20,
+                      height: 24,
                     ),
                     Text(
-                      "Google",
+                      " Google",
                       style: GoogleFonts.poppins(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
                       ),
                     )
                   ],
-                )).w(200),
+                )).w(150),
             ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
@@ -86,7 +86,7 @@ class SigninOptions extends StatelessWidget {
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SvgPicture.asset(R.ASSETS_ICONS_META_SVG, height: 20),
                     Text(
@@ -98,7 +98,7 @@ class SigninOptions extends StatelessWidget {
                       ),
                     )
                   ],
-                )).w(200),
+                )).w(150),
           ],
         ),
       ],

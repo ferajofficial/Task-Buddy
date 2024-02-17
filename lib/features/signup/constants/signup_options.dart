@@ -21,7 +21,7 @@ class SignupOptions extends StatelessWidget {
               color: Colors.grey,
               // indent: 50,
               // endIndent: 50,
-            ).w(130),
+            ).w(120),
             15.widthBox,
             Text(
               "Sign up with",
@@ -36,12 +36,12 @@ class SignupOptions extends StatelessWidget {
               color: Colors.grey,
               // indent: 50,
               // endIndent: 50,
-            ).w(130),
+            ).w(120),
           ],
         ),
-        30.heightBox,
+        20.heightBox,
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             ElevatedButton(
                 onPressed: () {},
@@ -64,14 +64,14 @@ class SignupOptions extends StatelessWidget {
                       height: 20,
                     ),
                     Text(
-                      "Google",
+                      " Google",
                       style: GoogleFonts.poppins(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
                       ),
                     )
                   ],
-                )).w(200),
+                )).w(150),
             ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
@@ -98,7 +98,7 @@ class SignupOptions extends StatelessWidget {
                       ),
                     )
                   ],
-                )).w(200),
+                )).w(150),
           ],
         ),
       ],

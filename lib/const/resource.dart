@@ -17,4 +17,8 @@ class R {
   /// ![preview](file:///Users/skferajuddin/Desktop/development/FlutterProjects/task_buddy/assets/illustrations/signup.svg)
   static const String ASSETS_ILLUSTRATIONS_SIGNUP_SVG =
       'assets/illustrations/signup.svg';
+
+  /// ![preview](file:///Users/skferajuddin/Desktop/development/FlutterProjects/task_buddy/assets/illustrations/splash.json)
+  static const String ASSETS_ILLUSTRATIONS_SPLASH_JSON =
+      'assets/illustrations/splash.json';
 }
