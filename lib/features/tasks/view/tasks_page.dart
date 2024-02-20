@@ -25,17 +25,22 @@ class TaskView extends StatefulWidget {
 
 class _TaskViewState extends State<TaskView> {
   TextEditingController dateController = TextEditingController();
+  final currentDate = DateTime.now();
+  final formattedDate =
+      "${DateTime.now().day}-${DateTime.now().month}-${DateTime.now().year}";
+
   Future<void> selectDate() async {
     DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
+      initialDatePickerMode: DatePickerMode.day,
     );
 
     if (picked != null) {
       setState(() {
-        dateController.text = picked.toLocal().toString();
+        dateController.text = "${picked.day}-${picked.month}-${picked.year}";
       });
     }
   }
@@ -65,6 +70,7 @@ class _TaskViewState extends State<TaskView> {
                 fontWeight: FontWeight.w500),
             5.heightBox,
             const TaskTiles(
+              name: String.fromEnvironment('title'),
               labelTask: 'Task Title',
               hintText: 'Enter Task Title',
               prefixicon: Icons.task_alt_rounded,
@@ -76,8 +82,9 @@ class _TaskViewState extends State<TaskView> {
                 fontWeight: FontWeight.w500),
             5.heightBox,
             const TaskTiles(
-              labelTask: 'Details',
-              hintText: 'Enter Task Details',
+              name: String.fromEnvironment('description'),
+              labelTask: 'Description',
+              hintText: 'Enter Task Description',
               maxLength: 150,
               maxLines: 5,
               prefixicon: Icons.description_rounded,
@@ -88,7 +95,10 @@ class _TaskViewState extends State<TaskView> {
                 fontSize: 15,
                 fontWeight: FontWeight.w500),
             5.heightBox,
-            const TaskTiles(
+            TaskTiles(
+              enabled: false,
+              dateController: TextEditingController(text: formattedDate),
+              name: const String.fromEnvironment('startDate'),
               labelTask: 'Start Date',
               hintText: 'Date',
               prefixicon: Icons.calendar_month_rounded,
@@ -98,6 +108,7 @@ class _TaskViewState extends State<TaskView> {
                 text: 'End Date: ', fontSize: 15, fontWeight: FontWeight.w500),
             5.heightBox,
             TaskTiles(
+              name: const String.fromEnvironment('endDate'),
               dateController: dateController,
               labelTask: 'End Date',
               hintText: 'Choose Date',

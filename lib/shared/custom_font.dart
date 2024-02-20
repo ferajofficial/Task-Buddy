@@ -18,11 +18,12 @@ class CustomText extends StatelessWidget {
   final bool isSecondaryFont;
   final int? maxlines;
   final TextOverflow overflow;
+
   const CustomText({
     Key? key,
     required this.text,
-    this.color ,
-    this.secondaryColor ,
+    this.color,
+    this.secondaryColor,
     this.fontWeight = FontWeight.w500,
     this.letterSpacing = 0.3,
     this.textAlign = TextAlign.center,
@@ -33,34 +34,33 @@ class CustomText extends StatelessWidget {
     this.decorationStyle,
     this.overflow = TextOverflow.clip,
     this.isSecondaryFont = false,
-    this.maxlines,
-    this.decoration,
+    this.maxlines, this.decoration,
+
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AutoSizeText(
       text,
-      style: 
-      // isSecondaryFont
-      //     ? GoogleFonts.quicksand(
-      //         fontWeight: FontWeight.w600,
-      //         fontSize: fontSize,
-      //         color: secondaryColor,
-      //       )
-      //     :
-           GoogleFonts.poppins(
-              fontSize: fontSize,
-              color: color,
-              fontWeight: fontWeight,
-              letterSpacing: letterSpacing,
-              height: 1.3,
-              decoration:
-                  isStrikeThrough ? TextDecoration.lineThrough : decoration,
-              decorationThickness: decorationThickness,
-              decorationColor: decorationColor,
-              decorationStyle: decorationStyle,
-            ),
+      style:
+          // isSecondaryFont
+          //     ? GoogleFonts.quicksand(
+          //         fontWeight: FontWeight.w600,
+          //         fontSize: fontSize,
+          //         color: secondaryColor,
+          //       )
+          //     :
+          GoogleFonts.poppins(
+        fontSize: fontSize,
+        color: color,
+        fontWeight: fontWeight,
+        letterSpacing: letterSpacing,
+        height: 1.3,
+        decoration: isStrikeThrough ? TextDecoration.lineThrough : decoration,
+        decorationThickness: decorationThickness,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+      ),
       textAlign: textAlign,
       overflow: overflow,
       maxLines: maxlines,

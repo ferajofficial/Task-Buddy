@@ -25,35 +25,6 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   bool isLoading = true;
 
-  // void floatButtonPressed() {
-  //   showDialog(
-  //       context: context,
-  //       builder: (context) {
-  //         return const AlertDialog(
-  //           backgroundColor: Colors.white,
-  //           title: CustomText(text: 'Add Task'),
-  //           content: Column(
-  //             mainAxisSize: MainAxisSize.min,
-  //             children: [Text("AlertBOx")],
-  //           ),
-  //           // actions: [
-  //           //   ElevatedButton(
-  //           //     onPressed: () {
-  //           //       context.router.pop();
-  //           //     },
-  //           //     child: const CustomText(text: 'Cancel'),
-  //           //   ),
-  //           //   ElevatedButton(
-  //           //     onPressed: () {
-  //           //       // context.router.pop();
-  //           //     },
-  //           //     child: const CustomText(text: 'Add'),
-  //           //   ),
-  //           // ],
-  //         );
-  //       });
-  // }
-
   @override
   void initState() {
     super.initState();
@@ -69,36 +40,22 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        centerTitle: false,
         elevation: 0,
         title: const CustomText(
-          text: 'Task Buddy',
+          text: 'Hello Buddy 👋',
           fontSize: 20,
           fontWeight: FontWeight.w600,
         ),
-        leading: GestureDetector(
-          onTap: () {
-            context.navigateTo(const ProfileRoute());
-          },
-          child: const CircleAvatar(
-            radius: 50,
-          ).pOnly(left: 8),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              // context.router.push(const SigninRoute());
-            },
-            icon: Container(
-              decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(0.5), shape: BoxShape.circle),
-              child: const Icon(
-                Icons.notifications,
-                size: 25,
-              ),
-            ).h(40).w(40),
+        leading: CircleAvatar(
+          // radius: 25,
+          backgroundColor: Colors.purple[200],
+          child: const Icon(
+            Icons.person,
+            // size: 35,
+            color: Colors.black,
           ),
-        ],
+        ).pOnly(left: 10),
       ),
       // bottomNavigationBar:
       body: SafeArea(

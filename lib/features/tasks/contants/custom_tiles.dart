@@ -14,6 +14,8 @@ class TaskTiles extends StatelessWidget {
     this.onPressed,
     this.suffixicon,
     this.dateController,
+    required this.name,
+    this.enabled,
   });
   final String labelTask;
   final String hintText;
@@ -23,17 +25,19 @@ class TaskTiles extends StatelessWidget {
   final VoidCallback? onPressed;
   final IconData? suffixicon;
   final TextEditingController? dateController;
+  final String name;
+  final bool? enabled;
 
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
+      enabled: enabled ?? true,
       controller: dateController,
-      name: "description",
+      name: name,
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.text,
       maxLength: maxLength,
       maxLines: maxLines,
-      // minLines: 2,
       decoration: InputDecoration(
         prefixIcon: prefixicon != null
             ? Icon(
