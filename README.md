@@ -1,16 +1,10 @@
-# task_buddy
+# Task Buddy
+Task Buddy is a web-based application designed to help users manage their tasks efficiently. Whether you’re organizing your personal to-do list or collaborating with a team, Task Buddy has got you covered.
 
-A new Flutter project.
+## Features
 
-## Getting Started
+1. Task Sharing via Email:
+Collaborate seamlessly with others by sharing tasks. Simply add their email IDs to a task, and they’ll receive notifications and updates.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+2. Dark Theme Support:
+Task Buddy offers a sleek and eye-friendly dark theme. Switch between light and dark modes based on your preference.
