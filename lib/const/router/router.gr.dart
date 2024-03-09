@@ -9,7 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i7;
-import 'package:task_buddy/features/home/home_page.dart' as _i1;
+import 'package:task_buddy/features/home/view/home_page.dart' as _i1;
 import 'package:task_buddy/features/profile/view/profile_page.dart' as _i2;
 import 'package:task_buddy/features/signin/view/signin_page.dart' as _i3;
 import 'package:task_buddy/features/signup/view/signup_page.dart' as _i4;

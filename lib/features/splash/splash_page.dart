@@ -27,13 +27,26 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
+    navigateBasedOnUser();
     Timer(
       const Duration(seconds: 2),
       () =>
-//* Put some conditions for LoggedIn User and SignedIn User, for
-//* better Navigation as per the LogedIn/SignedIn record */
           AutoRouter.of(context).replace(const SigninRoute()),
     );
+  }
+  Future<void> navigateBasedOnUser() async {
+    // bool isNew = await isNewUser();
+    // bool isSigned = await isSignedIn();
+    // bool isLoggedIn = await isLoggedIn();
+
+    // Navigate based on user status
+    // if (isNew) {
+    //   AutoRouter.of(context).replace(const SignupRoute());
+    // } else if (isSigned) {
+    //   AutoRouter.of(context).replace(const SigninRoute());
+    // } else if (isLoggedIn) {
+    //   AutoRouter.of(context).replace(const HomeRoute());
+    // }
   }
 
   @override

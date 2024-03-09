@@ -8,7 +8,7 @@ class SignInModel {
   SignInModel({
     this.status,
     this.message,
-    this.id,
+    this.id, 
   });
 
   SignInModel copyWith({

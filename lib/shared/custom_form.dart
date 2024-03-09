@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:task_buddy/bloc/authentication/authentication_bloc.dart';
+import 'package:task_buddy/bloc/authentication/authentication_event.dart';
+import 'package:task_buddy/shared/custom_button.dart';
+import 'package:task_buddy/shared/custom_font.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class CustomForm extends StatefulWidget {
@@ -12,12 +17,16 @@ class CustomForm extends StatefulWidget {
     this.additionalTextFieldName,
     this.additionalTextFieldValidator,
     this.additionalTextFieldDecoration,
+    required this.buttonTxt,
+    // required this.buttonTxt, required this.onPressed,
   }) : super(key: key);
 
   final bool additionalTextField;
   final String? additionalTextFieldName;
   final FormFieldValidator? additionalTextFieldValidator;
   final InputDecoration? additionalTextFieldDecoration;
+  final String buttonTxt;
+  // final VoidCallback onPressed;
 
   @override
   State<CustomForm> createState() => _CustomFormState();
@@ -26,11 +35,22 @@ class CustomForm extends StatefulWidget {
 class _CustomFormState extends State<CustomForm> {
   final _formKey = GlobalKey<FormBuilderState>();
   bool _obscureText = true;
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   void _togglePasswordVisibility() {
     setState(() {
       _obscureText = !_obscureText;
     });
+  }
+
+  //BloC
+  AuthenticationBloc? authenticationBloc;
+  @override
+  void initState() {
+    authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
+
+    super.initState();
   }
 
   @override
@@ -42,6 +62,7 @@ class _CustomFormState extends State<CustomForm> {
           if (widget
               .additionalTextField) // Check if additionalTextField is true
             FormBuilderTextField(
+              textInputAction: TextInputAction.next,
               name: widget.additionalTextFieldName ?? '',
               decoration: widget.additionalTextFieldDecoration ??
                   const InputDecoration(),
@@ -49,6 +70,7 @@ class _CustomFormState extends State<CustomForm> {
             ),
           20.heightBox,
           FormBuilderTextField(
+            controller: email,
             name: "email",
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.text,
@@ -87,10 +109,10 @@ class _CustomFormState extends State<CustomForm> {
             ]),
           ),
           20.heightBox,
-
           FormBuilderTextField(
+            controller: password,
             name: "password",
-            textInputAction: TextInputAction.done,
+            textInputAction: TextInputAction.next,
             obscureText: _obscureText,
             decoration: InputDecoration(
               prefixIcon: const Icon(Icons.fingerprint_outlined),
@@ -130,8 +152,44 @@ class _CustomFormState extends State<CustomForm> {
               FormBuilderValidators.minLength(11),
             ]),
           ),
-
-          // 5.heightBox,
+          5.heightBox,
+          if (widget.buttonTxt == 'Sign in')
+            Align(
+              alignment: Alignment.centerRight,
+              child: GestureDetector(
+                onTap: () {
+                  // context.navigateTo(
+                  //   const ForgotPasswordRoute()
+                  //   );
+                },
+                child: const CustomText(
+                  text: "Forgot Password?",
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.blueAccent,
+                ),
+              ),
+            ),
+          20.heightBox,
+          CustomButton(
+            width: double.infinity,
+            height: 50,
+            buttonTxt: widget.buttonTxt,
+            onPressed: () {
+              if (_formKey.currentState!.saveAndValidate()) {
+                print('button pressed');
+                if (widget.buttonTxt == 'Sign in') {
+                  authenticationBloc!.add(ButtonPressedEvent(
+                    email: email.text,
+                    password: password.text,
+                  ));
+                  // context.navigateTo(const HomeRoute());
+                } else if (widget.buttonTxt == 'Sign up') {
+                  // context.navigateTo(const HomeRoute());
+                }
+              }
+            },
+          ),
         ],
       ),
     );

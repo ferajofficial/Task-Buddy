@@ -20,7 +20,7 @@ class _CustomNavbarState extends State<CustomNavbar> {
 
   @override
   Widget build(BuildContext context) {
-    //*TODO: to use this custom navigation bar in any page, wrap the page scaffold with a stack widget
+    //* to use this custom navigation bar in any page, wrap the page scaffold with a stack widget
     return Stack(
       children: [
         Container(

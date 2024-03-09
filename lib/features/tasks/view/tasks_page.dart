@@ -49,6 +49,7 @@ class _TaskViewState extends State<TaskView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         leading: IconButton(
           onPressed: () {
             context.router.pop();
@@ -189,7 +190,12 @@ class _TaskViewState extends State<TaskView> {
                 width: double.infinity,
                 height: 50,
                 buttonTxt: 'Create Task',
-                onPressed: () {}),
+                onPressed: () {
+                  // context.read<TaskBuddyBloc>().add(const AddTasks(
+                  //       'Task',
+                  //     ));
+                  context.router.pop();
+                }),
           ],
         ).p12()),
       ),
