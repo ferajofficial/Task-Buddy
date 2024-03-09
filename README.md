@@ -1,5 +1,5 @@
 # Task Buddy
-Task Buddy is a web-based application designed to help users manage their tasks efficiently. Whether you’re organizing your personal to-do list or collaborating with a team, Task Buddy has got you covered.
+Task Buddy is a web-based application designed to help users manage their tasks efficiently. Whether you’re organizing your personal tasks or collaborating with a team, Task Buddy has got you covered.
 
 ## Features
 
