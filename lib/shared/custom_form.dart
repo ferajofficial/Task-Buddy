@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -48,7 +47,7 @@ class _CustomFormState extends State<CustomForm> {
   AuthenticationBloc? authenticationBloc;
   @override
   void initState() {
-    authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
+    // authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
 
     super.initState();
   }
@@ -177,12 +176,12 @@ class _CustomFormState extends State<CustomForm> {
             buttonTxt: widget.buttonTxt,
             onPressed: () {
               if (_formKey.currentState!.saveAndValidate()) {
-                print('button pressed');
                 if (widget.buttonTxt == 'Sign in') {
-                  authenticationBloc!.add(ButtonPressedEvent(
+                  authenticationBloc!.add(OnButtonPressEvent(
                     email: email.text,
                     password: password.text,
                   ));
+                  print('button pressed');
                   // context.navigateTo(const HomeRoute());
                 } else if (widget.buttonTxt == 'Sign up') {
                   // context.navigateTo(const HomeRoute());

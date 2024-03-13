@@ -1,8 +1,10 @@
-import 'dart:async';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:task_buddy/bloc/app/app_bloc.dart';
+import 'package:task_buddy/bloc/app/app_event.dart';
+import 'package:task_buddy/bloc/app/app_state.dart';
 import 'package:task_buddy/const/resource.dart';
 import 'package:task_buddy/const/router/router.gr.dart';
 
@@ -17,44 +19,49 @@ class SplashPage extends StatelessWidget {
 }
 
 class SplashView extends StatefulWidget {
-  const SplashView({super.key});
+  const SplashView({Key? key}) : super(key: key);
 
   @override
   State<SplashView> createState() => _SplashViewState();
 }
 
 class _SplashViewState extends State<SplashView> {
+  final _appStartedBloc = AppBloc();
+
   @override
   void initState() {
     super.initState();
-    navigateBasedOnUser();
-    Timer(
-      const Duration(seconds: 2),
-      () =>
-          AutoRouter.of(context).replace(const SigninRoute()),
-    );
-  }
-  Future<void> navigateBasedOnUser() async {
-    // bool isNew = await isNewUser();
-    // bool isSigned = await isSignedIn();
-    // bool isLoggedIn = await isLoggedIn();
-
-    // Navigate based on user status
-    // if (isNew) {
-    //   AutoRouter.of(context).replace(const SignupRoute());
-    // } else if (isSigned) {
-    //   AutoRouter.of(context).replace(const SigninRoute());
-    // } else if (isLoggedIn) {
-    //   AutoRouter.of(context).replace(const HomeRoute());
-    // }
+    _appStartedBloc.add(const AppInitialEvent());
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: LottieBuilder.asset(R.ASSETS_ILLUSTRATIONS_SPLASH_JSON),
-      ),
+    return BlocConsumer(
+      bloc: _appStartedBloc,
+      builder: (context, state) {
+        return Scaffold(
+          body: Center(
+            child: Lottie.asset(
+              R.ASSETS_ILLUSTRATIONS_SPLASH_JSON,
+            ),
+          ),
+        );
+      },
+      listener: (context, state) {
+        if (state is AppSuccessState) {
+          print(" into AppSuccessState");
+
+          context.navigateTo(const SigninRoute());
+        }
+        if (state is AppLoadingState) {
+          print(" into AppLoadingState");
+        }
+        if (state is AppLoadedState) {
+          print(" into AppLoadedState");
+
+          const CircularProgressIndicator();
+        }
+      },
     );
   }
 }

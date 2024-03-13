@@ -2,10 +2,8 @@ abstract class AuthenticationEvent {
   const AuthenticationEvent();
 }
 
-
-
-class ButtonPressedEvent extends AuthenticationEvent {
-  const ButtonPressedEvent({
+class OnButtonPressEvent extends AuthenticationEvent {
+  const OnButtonPressEvent({
     required this.email,
     required this.password,
   });
