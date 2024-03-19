@@ -15,15 +15,14 @@ class AuthenticationBloc
       : super(const AuthInitialState()) {
     on<OnInitialEvent>(_onInitialEvent);
     on<OnSignInEvent>(_onSignIn);
+    on<OnSignUpEvent>(_onSignUp);
   }
 
+//For SignIn
   FutureOr<void> _onSignIn(
       OnSignInEvent event, Emitter<AuthenticationState> emit) async {
-    // emit(AuthLoadingState(
-    //   event.email,
-    //   event.password,
-    // ));
-    final result =  await _authenticationRepo.login(event.email, event.password);
+    final result =
+        await _authenticationRepo.signin(event.email, event.password);
     if (result.status == true) {
       emit(const AuthSuccessState());
     } else {
@@ -31,27 +30,25 @@ class AuthenticationBloc
         message: result.message ?? 'Failed to login! Please try again.',
       ));
     }
-    //     .then((value) {
-    //   emit(AuthLoadingState(
-    //     event.email,
-    //     event.password,
-    //   ));
-    //   emit(const AuthLoadedState());
-    //   if ( == true) {
-    //     emit(const AuthSuccessState());
-    //   } else {
-    //     emit(AuthFailureState(
-    //       message: value['message'],
-    //     ));
-    //   }
-    // })
-    // .catchError((e) {
-    //   emit(AuthFailureState(message: e.toString()));
-    // });
   }
 
+//Initially
   FutureOr<void> _onInitialEvent(
       OnInitialEvent event, Emitter<AuthenticationState> emit) {
     emit(const AuthLoadedState());
+  }
+
+//For SignUp
+  FutureOr<void> _onSignUp(
+      OnSignUpEvent event, Emitter<AuthenticationState> emit) async {
+    final result = await _authenticationRepo.signup(
+        event.email, event.password, event.userName);
+    if (result.message == 'User already exists') {
+      emit(AuthFailureState(
+        message: result.message ?? 'User already exists',
+      ));
+    } else {
+      emit(const AuthSuccessState());
+    }
   }
 }

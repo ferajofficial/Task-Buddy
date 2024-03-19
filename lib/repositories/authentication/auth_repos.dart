@@ -3,9 +3,11 @@ import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:task_buddy/models/signin_model.dart';
+import 'package:task_buddy/models/signup_model.dart';
 
 class AuthenticationRepo {
-  Future<SignInModel> login(String email, String password) async {
+  //  --> SignIn the User
+  Future<SignInModel> signin(String email, String password) async {
     try {
       log('Login request sent', name: 'AuthenticationRepo');
       final Map<String, String> body = {
@@ -15,20 +17,39 @@ class AuthenticationRepo {
       final response = await http.post(
         Uri.parse('https://task-buddy-fe0i.onrender.com/admin/signin'),
         body: jsonEncode(body),
-         headers: <String, String>{
-          'Content-Type': 'application/json', // Specify the content type
+        headers: <String, String>{
+          'Content-Type': 'application/json',
         },
       );
       log('Login request completed', name: 'AuthenticationRepo');
-      // final result = jsonDecode(response.body);
-      // if (response.statusCode == 200) {
       final jsonBody = jsonDecode(response.body);
       log('Login request completed,response: $jsonBody');
-
       return SignInModel.fromMap(jsonBody);
-      // } else {
-      // throw Exception('Failed to login');
-      // }
+    } catch (e) {
+      throw Exception('Authentication Failed! Please try again.');
+    }
+  }
+  //  --> SignUp the User
+  Future<SignUpModel> signup(
+      String email, String password, String userName) async {
+    try {
+      log('Signup request sent', name: 'AuthenticationRepo');
+      final Map<String, String> body = {
+        'email': email,
+        'password': password,
+        'userName': userName,
+      };
+      final response = await http.post(
+        Uri.parse('https://task-buddy-fe0i.onrender.com/admin/signup'),
+        body: jsonEncode(body),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+      );
+      log('Signup request completed', name: 'AuthenticationRepo');
+      final jsonBody = jsonDecode(response.body);
+      log('Signup request completed,response: $jsonBody');
+      return SignUpModel.fromMap(jsonBody);
     } catch (e) {
       throw Exception('Authentication Failed! Please try again.');
     }
