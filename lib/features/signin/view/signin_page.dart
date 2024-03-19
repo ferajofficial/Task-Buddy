@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +7,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:task_buddy/bloc/app/app_bloc.dart';
 import 'package:task_buddy/bloc/app/app_state.dart';
+import 'package:task_buddy/bloc/authentication/authentication_state.dart';
 import 'package:task_buddy/const/resource.dart';
 import 'package:task_buddy/const/router/router.gr.dart';
 import 'package:task_buddy/features/signin/constants/signin_options.dart';
@@ -115,7 +118,7 @@ class _SigninViewState extends State<SigninView> {
                             ),
                           ),
                           25.heightBox,
-                          const SigninOptions(),
+                          const SigninWithGoogle(),
                         ],
                       ).p12(),
                     ),
@@ -123,14 +126,14 @@ class _SigninViewState extends State<SigninView> {
           );
         },
         listener: (context, state) {
-          if (state is AppLoadedState) {
-            print(" into AppLoadedState");
+          if (state is AuthSuccessState) {
+            context.navigateTo(const HomeRoute());
             const Center(
               child: CircularProgressIndicator(),
             );
           }
           if (state is AppLoadingState) {
-            print(" into AppLoadingState");
+            log('into the ApploadingState');
           }
         });
   }

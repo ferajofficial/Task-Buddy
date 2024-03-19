@@ -145,7 +145,7 @@ class _SignupViewState extends State<SignupView> {
                           ])),
                     ).centered(),
                     15.heightBox,
-                    const SignupOptions()
+                    const SignupWithGoogle()
                   ],
                 ).p12(),
               ),

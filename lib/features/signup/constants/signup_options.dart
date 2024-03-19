@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:task_buddy/const/resource.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class SignupOptions extends StatelessWidget {
-  const SignupOptions({
+class SignupWithGoogle extends StatelessWidget {
+  const SignupWithGoogle({
     super.key,
   });
 
@@ -61,44 +61,17 @@ class SignupOptions extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       R.ASSETS_ICONS_GOOGLE_SVG,
-                      height: 20,
+                      height: 24,
                     ),
                     Text(
                       " Google",
                       style: GoogleFonts.poppins(
-                        fontSize: 15,
+                        fontSize: 17,
                         fontWeight: FontWeight.w500,
                       ),
                     )
                   ],
-                )).w(150),
-            ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  elevation: 0,
-                  minimumSize: const Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(
-                      color: Colors.grey,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SvgPicture.asset(R.ASSETS_ICONS_META_SVG, height: 20),
-                    Text(
-                      "Meta",
-                      style: GoogleFonts.poppins(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        // color: Colors.white
-                      ),
-                    )
-                  ],
-                )).w(150),
+                )).w(250),
           ],
         ),
       ],

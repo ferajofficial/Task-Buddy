@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -36,20 +38,19 @@ class _CustomFormState extends State<CustomForm> {
   bool _obscureText = true;
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController userName = TextEditingController();
+
+  final authenticationBloc = AuthenticationBloc();
+  @override
+  void initState() {
+    super.initState();
+    authenticationBloc.add(const OnInitialEvent());
+  }
 
   void _togglePasswordVisibility() {
     setState(() {
       _obscureText = !_obscureText;
     });
-  }
-
-  //BloC
-  AuthenticationBloc? authenticationBloc;
-  @override
-  void initState() {
-    // authenticationBloc = BlocProvider.of<AuthenticationBloc>(context);
-
-    super.initState();
   }
 
   @override
@@ -148,7 +149,7 @@ class _CustomFormState extends State<CustomForm> {
             ),
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
-              FormBuilderValidators.minLength(11),
+              FormBuilderValidators.minLength(5),
             ]),
           ),
           5.heightBox,
@@ -164,7 +165,7 @@ class _CustomFormState extends State<CustomForm> {
                 child: const CustomText(
                   text: "Forgot Password?",
                   fontSize: 14,
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w500,
                   color: Colors.blueAccent,
                 ),
               ),
@@ -177,13 +178,22 @@ class _CustomFormState extends State<CustomForm> {
             onPressed: () {
               if (_formKey.currentState!.saveAndValidate()) {
                 if (widget.buttonTxt == 'Sign in') {
-                  authenticationBloc!.add(OnButtonPressEvent(
-                    email: email.text,
-                    password: password.text,
-                  ));
-                  print('button pressed');
+                  authenticationBloc.add(
+                    OnSignInEvent(
+                      email: email.text,
+                      password: password.text,
+                    ),
+                  );
+                  log('Sign in button pressed');
                   // context.navigateTo(const HomeRoute());
                 } else if (widget.buttonTxt == 'Sign up') {
+                  authenticationBloc.add(
+                    OnSignUpEvent(
+                      email: email.text,
+                      password: password.text,
+                      userName: userName.text,
+                    ),
+                  );
                   // context.navigateTo(const HomeRoute());
                 }
               }

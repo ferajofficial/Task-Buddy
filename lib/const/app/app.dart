@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_buddy/bloc/app/app_bloc.dart';
+import 'package:task_buddy/bloc/authentication/authentication_bloc.dart';
 import 'package:task_buddy/const/router/router.dart';
 
 class TaskBuddy extends StatefulWidget {
@@ -18,9 +19,7 @@ class _TaskBuddyState extends State<TaskBuddy> {
     return MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => AppBloc()),
-          // BlocProvider(
-          //     create: (context) => AuthenticationBloc(const AuthenticationState(
-          //         authStatus: AuthenticationStatus.loading))),
+          BlocProvider(create: (context) => AuthenticationBloc()),
         ],
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,

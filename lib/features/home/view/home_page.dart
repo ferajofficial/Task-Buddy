@@ -39,111 +39,99 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // backgroundColor: Colors.blue,
-        centerTitle: false,
-        elevation: 0,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const CustomText(
-              text: ' Hello Buddy 👋',
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
-            // 5.heightBox,
-            ListView.builder(
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              primary: false,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: 3,
-              itemBuilder: (BuildContext context, int index) {
-                return const ChoiceChip(
-                  showCheckmark: true,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                  ),
-                  avatar: Icon(Icons.task_alt),
-                  label: CustomText(text: 'My Tasks'),
-                  selected: true,
-                ).p4();
-              },
-            ).h(50),
-          ],
-        ),
-        leading: const CircleAvatar(
-          // radius: 30,
-          // backgroundColor: Colors.purple[200],
-          child: Icon(
-            Icons.person,
-            color: Colors.black,
+        appBar: AppBar(
+          // backgroundColor: Colors.blue,
+          centerTitle: false,
+          elevation: 0,
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const CustomText(
+                text: ' Hello Buddy 👋',
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
+              // 5.heightBox,
+              ListView.builder(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                primary: false,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: 3,
+                itemBuilder: (BuildContext context, int index) {
+                  return const ChoiceChip(
+                    showCheckmark: true,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    avatar: Icon(Icons.task_alt),
+                    label: CustomText(text: 'My Tasks'),
+                    selected: true,
+                  ).p4();
+                },
+              ).h(50),
+            ],
           ),
-        ).pOnly(left: 10),
-        toolbarHeight: 100,
-      ),
-      // bottomNavigationBar:
-      body: SafeArea(
-        bottom: false,
-        child: isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : Stack(children: [
-                SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: const CustomText(
-                          text: 'My Tasks',
-                          fontSize: 18,
-                          textAlign: TextAlign.left,
-                        ).pOnly(left: 20, top: 10),
-                      ),
-                      10.heightBox,
-                      // BlocBuilder<TaskBuddyBloc, TaskBuddyState>(
-                      //   builder: (context, state) {
-                      //     if (state.tasks.isEmpty) {
-                      //       return const Center(
-                      //         child: CustomText(
-                      //           text: 'No Task found',
-                      //           fontSize: 15,
-                      //           fontWeight: FontWeight.w600,
-                      //         ),
-                      //       ).pOnly(top: 300);
-                      //     } else if (state.tasks.isNotEmpty) {
-                      //       // return const TaskCards();
-                      //       return ListView.builder(
-                      //           shrinkWrap: true,
-                      //           physics: const NeverScrollableScrollPhysics(),
-                      //           itemCount: state.tasks.length,
-                      //           itemBuilder: (context, index) {
-                      //             return TaskCards(
-                      //                 taskTitle: state.tasks[index],
-                      //                 taskDescription: 'description',
-                      //                 dueDate: 'date',
-                      //                 priority: 'priority');
-                      //           });
-                      //     } else {
-                      //       return const Center(
-                      //         child: CircularProgressIndicator(),
-                      //       ).pOnly(top: 300);
-                      //     }
-                      //   },
-                      // ),
-                      
-                    ],
+          leading: const CircleAvatar(
+            // radius: 30,
+            // backgroundColor: Colors.purple[200],
+            child: Icon(
+              Icons.person,
+              color: Colors.black,
+            ),
+          ).pOnly(left: 10),
+          toolbarHeight: 100,
+        ),
+        // bottomNavigationBar:
+        body: SafeArea(
+          bottom: false,
+          child: isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : Stack(children: [
+                  SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: const CustomText(
+                            text: 'My Tasks',
+                            fontSize: 18,
+                            textAlign: TextAlign.left,
+                          ).pOnly(left: 20, top: 10),
+                        ),
+                        10.heightBox,
+
+                        // return const TaskCards();
+                        // ListView.builder(
+                        //     shrinkWrap: true,
+                        //     physics: const NeverScrollableScrollPhysics(),
+                        //     // itemCount:tasks.length,
+                        //     itemBuilder: (context, index) {
+                        //       return const TaskCards(
+                        //           taskTitle: 'title',
+                        //           taskDescription: 'description',
+                        //           dueDate: 'date',
+                        //           priority: 'priority');
+                        //     })
+                      ],
+                    ),
                   ),
-                ),
-                CustomNavbar(
-                  onPressed: () {
-                    context.navigateTo(const TasksRoute());
-                  },
-                ).h(100).objectBottomCenter()
-              ]),
-      ),
-    );
+                  CustomNavbar(
+                    onPressed: () {
+                      context.navigateTo(const TasksRoute());
+                    },
+                  ).h(100).objectBottomCenter()
+                ]),
+        )
+        //  return const AlertDialog(
+        //   title: Text('Error'),
+        //   content: Text('Something went wrong'),
+
+        //  );
+
+        );
   }
 }

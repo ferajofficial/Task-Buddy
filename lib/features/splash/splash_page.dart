@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,15 +51,15 @@ class _SplashViewState extends State<SplashView> {
       },
       listener: (context, state) {
         if (state is AppSuccessState) {
-          print(" into AppSuccessState");
+          log('into the AppSuccessState');
 
           context.navigateTo(const SigninRoute());
         }
         if (state is AppLoadingState) {
-          print(" into AppLoadingState");
+          log('into the ApploadingState');
         }
         if (state is AppLoadedState) {
-          print(" into AppLoadedState");
+          log('inot the AppLoadedState');
 
           const CircularProgressIndicator();
         }
