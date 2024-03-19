@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:task_buddy/bloc/app/app_bloc.dart';
-import 'package:task_buddy/bloc/app/app_state.dart';
+import 'package:task_buddy/bloc/authentication/authentication_bloc.dart';
+import 'package:task_buddy/bloc/authentication/authentication_event.dart';
 import 'package:task_buddy/bloc/authentication/authentication_state.dart';
 import 'package:task_buddy/const/resource.dart';
 import 'package:task_buddy/const/router/router.gr.dart';
@@ -37,20 +37,26 @@ class SigninView extends StatefulWidget {
 class _SigninViewState extends State<SigninView> {
   bool isLoading = true;
   // AuthenticationBloc? authenticationBloc;
+  final authenticationBloc = AuthenticationBloc();
   @override
   void initState() {
     super.initState();
+
     Future.delayed(const Duration(seconds: 2), () {
       setState(() {
         isLoading = false;
       });
     });
+
+    authenticationBloc.add(const OnInitialEvent());
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
-        bloc: BlocProvider.of<AppBloc>(context),
+        bloc: authenticationBloc,
+        listenWhen: (previous, current) => current is AuthActionState,
+        buildWhen: (previous, current) => current is! AuthActionState,
         builder: (context, state) {
           return Scaffold(
             body: SafeArea(
@@ -84,8 +90,9 @@ class _SigninViewState extends State<SigninView> {
                             color: Colors.grey,
                           ),
                           // 10.heightBox,
-                          const CustomForm(
+                          CustomForm(
                             buttonTxt: 'Sign in',
+                            authenticationBloc: authenticationBloc,
                           ),
                           // 5.heightBox,
                           15.heightBox,
@@ -125,15 +132,20 @@ class _SigninViewState extends State<SigninView> {
             ),
           );
         },
-        listener: (context, state) {
-          if (state is AuthSuccessState) {
-            context.navigateTo(const HomeRoute());
-            const Center(
-              child: CircularProgressIndicator(),
-            );
+        listener: (context, state) async {
+          log('state : $state');
+          if (state is AuthLoadingState) {
+            log('Authentication loading');
           }
-          if (state is AppLoadingState) {
-            log('into the ApploadingState');
+          if (state is AuthLoadedState) {
+            log('Authentication loaded');
+          }
+          if (state is AuthSuccessState) {
+            log('Authentication Success');
+            context.navigateTo(const HomeRoute());
+          }
+          if (state is AuthFailureState) {
+            log('Authentication Failed');
           }
         });
   }

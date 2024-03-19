@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+
+
+@immutable
 abstract class AuthenticationEvent {
   const AuthenticationEvent();
 }

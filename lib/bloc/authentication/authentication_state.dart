@@ -1,35 +1,25 @@
-import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
-class AuthenticationState extends Equatable {
+@immutable
+abstract class AuthenticationState {
   // final AuthenticationStatus authStatus;
   const AuthenticationState();
-  @override
-  List<Object?> get props => [];
-
-  AuthenticationState copyWith() {
-    return const AuthenticationState();
-  }
 }
+
+abstract class AuthActionState extends AuthenticationState {}
 
 class AuthInitialState extends AuthenticationState {
-  const AuthInitialState();
+
 }
 
-class AuthLoadingState extends AuthenticationState {
-  final String email;
-  final String password;
-  const AuthLoadingState(
-    this.email,
-    this.password,
-  ) : super();
-}
+class AuthLoadingState extends AuthenticationState {}
 
 class AuthLoadedState extends AuthenticationState {
-  const AuthLoadedState();
+
 }
 
 class AuthSuccessState extends AuthenticationState {
-  const AuthSuccessState();
+
 }
 
 class AuthFailureState extends AuthenticationState {

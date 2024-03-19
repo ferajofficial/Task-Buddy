@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:task_buddy/bloc/authentication/authentication_bloc.dart';
+import 'package:task_buddy/bloc/authentication/authentication_event.dart';
 import 'package:task_buddy/const/resource.dart';
 import 'package:task_buddy/features/signup/constants/signup_options.dart';
 import 'package:task_buddy/shared/custom_form.dart';
@@ -27,6 +29,7 @@ class SignupView extends StatefulWidget {
 
 class _SignupViewState extends State<SignupView> {
   bool isLoading = true;
+  final authenticationBloc = AuthenticationBloc();
 
   @override
   void initState() {
@@ -37,6 +40,7 @@ class _SignupViewState extends State<SignupView> {
         isLoading = false; // Set isLoading to false after the delay
       });
     });
+    authenticationBloc.add(const OnInitialEvent());
   }
 
   @override
@@ -76,7 +80,7 @@ class _SignupViewState extends State<SignupView> {
               20.heightBox,
               CustomForm(
                 buttonTxt: 'Sign up',
-                additionalTextField: true,
+                isAdditionalTextField: true,
                 additionalTextFieldName: "username",
                 additionalTextFieldValidator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(),
@@ -111,6 +115,7 @@ class _SignupViewState extends State<SignupView> {
                     ),
                   ),
                 ),
+                authenticationBloc: authenticationBloc,
               ),
               // 20.heightBox,
               // CustomButton(

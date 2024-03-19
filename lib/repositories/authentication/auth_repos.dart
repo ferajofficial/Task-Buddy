@@ -29,15 +29,16 @@ class AuthenticationRepo {
       throw Exception('Authentication Failed! Please try again.');
     }
   }
+
   //  --> SignUp the User
   Future<SignUpModel> signup(
       String email, String password, String userName) async {
     try {
       log('Signup request sent', name: 'AuthenticationRepo');
       final Map<String, String> body = {
+        'name': userName,
         'email': email,
         'password': password,
-        'userName': userName,
       };
       final response = await http.post(
         Uri.parse('https://task-buddy-fe0i.onrender.com/admin/signup'),

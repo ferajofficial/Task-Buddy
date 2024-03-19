@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:task_buddy/bloc/authentication/authentication_event.dart';
@@ -12,7 +13,7 @@ class AuthenticationBloc
   AuthenticationBloc(
       // AuthenticationState initialState,
       )
-      : super(const AuthInitialState()) {
+      : super(AuthInitialState()) {
     on<OnInitialEvent>(_onInitialEvent);
     on<OnSignInEvent>(_onSignIn);
     on<OnSignUpEvent>(_onSignUp);
@@ -21,11 +22,16 @@ class AuthenticationBloc
 //For SignIn
   FutureOr<void> _onSignIn(
       OnSignInEvent event, Emitter<AuthenticationState> emit) async {
+    // emit(AuthLoadingState());
     final result =
         await _authenticationRepo.signin(event.email, event.password);
+    log('Result : $result');
     if (result.status == true) {
-      emit(const AuthSuccessState());
+      log('Going to Success State');
+      emit(AuthSuccessState());
     } else {
+      log('Going to failed State');
+
       emit(AuthFailureState(
         message: result.message ?? 'Failed to login! Please try again.',
       ));
@@ -34,8 +40,9 @@ class AuthenticationBloc
 
 //Initially
   FutureOr<void> _onInitialEvent(
-      OnInitialEvent event, Emitter<AuthenticationState> emit) {
-    emit(const AuthLoadedState());
+      OnInitialEvent event, Emitter<AuthenticationState> emit) async {
+    await Future.delayed(const Duration(seconds: 2));
+    emit(AuthLoadedState());
   }
 
 //For SignUp
@@ -47,8 +54,8 @@ class AuthenticationBloc
       emit(AuthFailureState(
         message: result.message ?? 'User already exists',
       ));
-    } else {
-      emit(const AuthSuccessState());
+    } else if (result.message == 'User signedup successfully') {
+      emit(AuthSuccessState());
     }
   }
 }

@@ -6,6 +6,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:task_buddy/bloc/authentication/authentication_bloc.dart';
 import 'package:task_buddy/bloc/authentication/authentication_event.dart';
+import 'package:task_buddy/features/signup/const/signup_keys.dart';
 import 'package:task_buddy/shared/custom_button.dart';
 import 'package:task_buddy/shared/custom_font.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -14,19 +15,20 @@ class CustomForm extends StatefulWidget {
   const CustomForm({
     Key? key,
     // Add any additional parameters you need here
-    this.additionalTextField = false,
+    this.isAdditionalTextField = false,
     this.additionalTextFieldName,
     this.additionalTextFieldValidator,
     this.additionalTextFieldDecoration,
-    required this.buttonTxt,
+    required this.buttonTxt, required this.authenticationBloc,
     // required this.buttonTxt, required this.onPressed,
   }) : super(key: key);
 
-  final bool additionalTextField;
+  final bool isAdditionalTextField;
   final String? additionalTextFieldName;
   final FormFieldValidator? additionalTextFieldValidator;
   final InputDecoration? additionalTextFieldDecoration;
   final String buttonTxt;
+  final AuthenticationBloc authenticationBloc;
   // final VoidCallback onPressed;
 
   @override
@@ -36,16 +38,9 @@ class CustomForm extends StatefulWidget {
 class _CustomFormState extends State<CustomForm> {
   final _formKey = GlobalKey<FormBuilderState>();
   bool _obscureText = true;
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
-  TextEditingController userName = TextEditingController();
 
-  final authenticationBloc = AuthenticationBloc();
-  @override
-  void initState() {
-    super.initState();
-    authenticationBloc.add(const OnInitialEvent());
-  }
+
+ 
 
   void _togglePasswordVisibility() {
     setState(() {
@@ -59,19 +54,17 @@ class _CustomFormState extends State<CustomForm> {
       key: _formKey,
       child: Column(
         children: [
-          if (widget
-              .additionalTextField) // Check if additionalTextField is true
+          if (widget.isAdditionalTextField)
             FormBuilderTextField(
               textInputAction: TextInputAction.next,
-              name: widget.additionalTextFieldName ?? '',
+              name: SignUpFormKeys.name,
               decoration: widget.additionalTextFieldDecoration ??
                   const InputDecoration(),
               validator: widget.additionalTextFieldValidator,
             ),
           20.heightBox,
           FormBuilderTextField(
-            controller: email,
-            name: "email",
+            name: SignUpFormKeys.email,
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.text,
             decoration: const InputDecoration(
@@ -110,8 +103,7 @@ class _CustomFormState extends State<CustomForm> {
           ),
           20.heightBox,
           FormBuilderTextField(
-            controller: password,
-            name: "password",
+            name: SignUpFormKeys.password,
             textInputAction: TextInputAction.next,
             obscureText: _obscureText,
             decoration: InputDecoration(
@@ -177,24 +169,29 @@ class _CustomFormState extends State<CustomForm> {
             buttonTxt: widget.buttonTxt,
             onPressed: () {
               if (_formKey.currentState!.saveAndValidate()) {
+                final fields = _formKey.currentState!.fields;
+                final email = fields[SignUpFormKeys.email]!.value as String;
+                final password =
+                    fields[SignUpFormKeys.password]!.value as String;
+
                 if (widget.buttonTxt == 'Sign in') {
-                  authenticationBloc.add(
+                  widget.authenticationBloc.add(
                     OnSignInEvent(
-                      email: email.text,
-                      password: password.text,
+                      email: email,
+                      password: password,
                     ),
                   );
                   log('Sign in button pressed');
-                  // context.navigateTo(const HomeRoute());
                 } else if (widget.buttonTxt == 'Sign up') {
-                  authenticationBloc.add(
+                  final userName = fields[SignUpFormKeys.name]!.value as String;
+                  log(userName);
+                 widget. authenticationBloc.add(
                     OnSignUpEvent(
-                      email: email.text,
-                      password: password.text,
-                      userName: userName.text,
+                      userName: userName,
+                      email: email,
+                      password: password,
                     ),
                   );
-                  // context.navigateTo(const HomeRoute());
                 }
               }
             },
