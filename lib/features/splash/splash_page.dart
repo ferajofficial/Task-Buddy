@@ -9,7 +9,6 @@ import 'package:task_buddy/bloc/app/app_event.dart';
 import 'package:task_buddy/bloc/app/app_state.dart';
 import 'package:task_buddy/const/resource.dart';
 import 'package:task_buddy/const/router/router.gr.dart';
-import 'package:task_buddy/shared/custom_loader.dart';
 
 @RoutePage()
 class SplashPage extends StatelessWidget {
@@ -39,7 +38,7 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer(
+    return BlocConsumer<AppBloc, AppState>(
       bloc: _appStartedBloc,
       builder: (context, state) {
         return Scaffold(
@@ -51,17 +50,11 @@ class _SplashViewState extends State<SplashView> {
         );
       },
       listener: (context, state) {
-        if (state is AppSuccessState) {
+        if (state is UserUnAuthenticatedState) {
           log('into the AppSuccessState');
           context.navigateTo(const SigninRoute());
-        }
-        if (state is AppLoadingState) {
-          log('into the ApploadingState');
-        }
-        if (state is AppLoadedState) {
-           const LoadingWidget();
-          log('inot the AppLoadedState');
-         
+        } else if (state is UserAuthenticatedState) {
+          context.navigateTo(const HomeRoute());
         }
       },
     );

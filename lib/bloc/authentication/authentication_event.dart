@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-
 @immutable
 abstract class AuthenticationEvent {
   const AuthenticationEvent();
 }
 
-class OnInitialEvent extends AuthenticationEvent {
-  const OnInitialEvent();
-}
+class AuthenticationInitialEvent extends AuthenticationEvent {}
+
 class OnSignInEvent extends AuthenticationEvent {
   const OnSignInEvent({
     required this.email,
@@ -19,7 +17,7 @@ class OnSignInEvent extends AuthenticationEvent {
 }
 
 class OnSignUpEvent extends AuthenticationEvent {
-  const OnSignUpEvent( {
+  const OnSignUpEvent({
     required this.userName,
     required this.email,
     required this.password,
@@ -28,6 +26,7 @@ class OnSignUpEvent extends AuthenticationEvent {
   final String email;
   final String password;
 }
+
 class OnSignOutEvent extends AuthenticationEvent {
   const OnSignOutEvent();
 }
