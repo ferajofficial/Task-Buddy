@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:http/http.dart' as http;
+import 'package:task_buddy/const/env/env.dart';
 import 'package:task_buddy/models/signin_model.dart';
 import 'package:task_buddy/models/signup_model.dart';
 
@@ -15,7 +16,7 @@ class AuthenticationRepo {
         'password': password,
       };
       final response = await http.post(
-        Uri.parse('https://task-buddy-fe0i.onrender.com/admin/signin'),
+        Uri.parse('${Env.baseUrl}/admin/signin'),
         body: jsonEncode(body),
         headers: <String, String>{
           'Content-Type': 'application/json',
@@ -41,7 +42,7 @@ class AuthenticationRepo {
         'password': password,
       };
       final response = await http.post(
-        Uri.parse('https://task-buddy-fe0i.onrender.com/admin/signup'),
+        Uri.parse('${Env.baseUrl}/admin/signup'),
         body: jsonEncode(body),
         headers: <String, String>{
           'Content-Type': 'application/json',

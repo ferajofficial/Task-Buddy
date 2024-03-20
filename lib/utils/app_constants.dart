@@ -1,3 +1,3 @@
 class AppConstatns {
-  static const String studentId = 'studentId';
+  static const String userId = 'userId';
 }

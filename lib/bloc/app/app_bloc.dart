@@ -11,21 +11,19 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     on<AppInitialEvent>(_onInitialEvent);
   }
 
-  FutureOr<void> _onInitialEvent(AppInitialEvent event, Emitter<AppState> emit) async {
+  FutureOr<void> _onInitialEvent(
+      AppInitialEvent event, Emitter<AppState> emit) async {
     emit(const AppLoadingState());
 
     await Future.delayed(const Duration(seconds: 3));
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? studentId = prefs.getString(AppConstatns.studentId);
+    final String? userId = prefs.getString(AppConstatns.userId);
 
-    if (studentId != null) {
+    if (userId != null) {
       emit(const UserAuthenticatedState());
     } else {
       emit(const UserUnAuthenticatedState());
     }
-    // emit(const AppLoadedState());
-
-    // await Future.delayed(const Duration(seconds: 1));
-    // emit(const AppSuccessState());
+    
   }
 }
