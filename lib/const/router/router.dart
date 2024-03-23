@@ -17,6 +17,6 @@ class AppRouter extends $AppRouter {
     AdaptiveRoute(page: SignupRoute.page, path: '/signup'),
     AdaptiveRoute(page: HomeRoute.page, path: '/home'),
     AdaptiveRoute(page: ProfileRoute.page, path: '/profile'),
-    AdaptiveRoute(page: TasksRoute.page, path: '/tasks'),
+    AdaptiveRoute(page: CreateTasksRoute.page, path: '/tasks'),
   ];
 }

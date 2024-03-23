@@ -125,7 +125,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                   CustomNavbar(
                     onPressed: () {
-                      context.navigateTo(const TasksRoute());
+                      context.navigateTo(const CreateTasksRoute());
                     },
                   ).h(100).objectBottomCenter()
                 ]),

@@ -24,6 +24,8 @@ class _TaskBuddyState extends State<TaskBuddy> {
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
           routerConfig: _appRouter.config(),
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
         ));
   }
 }

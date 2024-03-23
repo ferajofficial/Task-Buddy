@@ -7,23 +7,23 @@ import 'package:task_buddy/shared/custom_font.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 @RoutePage()
-class TasksPage extends StatelessWidget {
-  const TasksPage({Key? key}) : super(key: key);
+class CreateTasksPage extends StatelessWidget {
+  const CreateTasksPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const TaskView();
+    return const CreateTaskView();
   }
 }
 
-class TaskView extends StatefulWidget {
-  const TaskView({super.key});
+class CreateTaskView extends StatefulWidget {
+  const CreateTaskView({super.key});
 
   @override
-  State<TaskView> createState() => _TaskViewState();
+  State<CreateTaskView> createState() => _CreateTaskViewState();
 }
 
-class _TaskViewState extends State<TaskView> {
+class _CreateTaskViewState extends State<CreateTaskView> {
   TextEditingController dateController = TextEditingController();
   final currentDate = DateTime.now();
   final formattedDate =
@@ -52,7 +52,7 @@ class _TaskViewState extends State<TaskView> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            context.router.pop();
+            context.router.maybePop();
           },
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
         ),
@@ -71,7 +71,7 @@ class _TaskViewState extends State<TaskView> {
                 fontWeight: FontWeight.w500),
             5.heightBox,
             const TaskTiles(
-              name: String.fromEnvironment('title'),
+              name: '',
               labelTask: 'Task Title',
               hintText: 'Enter Task Title',
               prefixicon: Icons.task_alt_rounded,
@@ -191,10 +191,7 @@ class _TaskViewState extends State<TaskView> {
                 height: 50,
                 buttonTxt: 'Create Task',
                 onPressed: () {
-                  // context.read<TaskBuddyBloc>().add(const AddTasks(
-                  //       'Task',
-                  //     ));
-                  context.router.pop();
+                  context.maybePop();
                 }),
           ],
         ).p12()),
