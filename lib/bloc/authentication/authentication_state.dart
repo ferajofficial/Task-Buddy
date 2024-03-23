@@ -28,8 +28,11 @@ class AuthSuccessState extends AuthActionState {
 class AuthFailureState extends AuthActionState {
   final String message;
   AuthFailureState({required this.message});
-  @override
+
   List<Object?> get props => [message];
 }
 
 class AuthenticationErrorState extends AuthActionState {}
+ class AuthSignOutState extends AuthActionState{
+  
+ }

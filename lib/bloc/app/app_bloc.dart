@@ -17,13 +17,12 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
     await Future.delayed(const Duration(seconds: 3));
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? userId = prefs.getString(AppConstatns.userId);
+    final String? userId = prefs.getString(AppConstants.userId);
 
     if (userId != null) {
       emit(const UserAuthenticatedState());
     } else {
       emit(const UserUnAuthenticatedState());
     }
-    
   }
 }

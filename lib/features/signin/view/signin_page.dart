@@ -37,18 +37,11 @@ class SigninView extends StatefulWidget {
 
 class _SigninViewState extends State<SigninView> {
   bool isLoading = true;
-  // AuthenticationBloc? authenticationBloc;
   final authenticationBloc = AuthenticationBloc();
+
   @override
   void initState() {
     super.initState();
-
-    // Future.delayed(const Duration(seconds: 2), () {
-    //   setState(() {
-    //     isLoading = false;
-    //   });
-    // });
-
     authenticationBloc.add(AuthenticationInitialEvent());
   }
 
@@ -67,91 +60,98 @@ class _SigninViewState extends State<SigninView> {
         }
         if (state is AuthSuccessState) {
           log('Authentication Success');
-          context.navigateTo(const HomeRoute());
+          context.router.replaceAll([const HomeRoute()]);
         }
         if (state is AuthFailureState) {
           log('Authentication Failed');
+          // context.router.replaceAll([const SigninRoute()]);
+          authenticationBloc.add(AuthenticationInitialEvent());
         }
       },
       buildWhen: (previous, current) => current is! AuthActionState,
       builder: (context, state) {
-        if (state is AuthLoadingState) {
-          return const LoadingWidget();
-        } else if (state is AuthLoadedState) {
-          return Scaffold(
-            body: SafeArea(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: SvgPicture.asset(
-                        R.ASSETS_ILLUSTRATIONS_SIGNIN_SVG,
-                        height: 200,
+        return Scaffold(
+          body: Stack(
+            children: [
+              SafeArea(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: SvgPicture.asset(
+                          R.ASSETS_ILLUSTRATIONS_SIGNIN_SVG,
+                          height: 200,
+                        ),
                       ),
-                    ),
-                    20.heightBox,
-                    Text(
-                      "Welcome Back!!",
-                      style: GoogleFonts.poppins(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w600,
+                      20.heightBox,
+                      Text(
+                        "Welcome Back!!",
+                        style: GoogleFonts.poppins(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    // 20.heightBox,
-                    const CustomText(
-                      text: "Good to see you again 😅",
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey,
-                    ),
-                    // 10.heightBox,
-                    CustomForm(
-                      buttonTxt: 'Sign in',
-                      authenticationBloc: authenticationBloc,
-                    ),
-                    // 5.heightBox,
-                    15.heightBox,
-                    Align(
-                      alignment: Alignment.center,
-                      child: GestureDetector(
-                        onTap: () {
-                          context.navigateTo(const SignupRoute());
-                        },
-                        child: RichText(
-                          text: TextSpan(
-                            text: "Don't have an account? ",
-                            style: GoogleFonts.poppins(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: "Sign Up",
-                                style: GoogleFonts.poppins(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.blue,
-                                ),
+                      // 20.heightBox,
+                      const CustomText(
+                        text: "Good to see you again 😅",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.grey,
+                      ),
+                      // 10.heightBox,
+                      CustomForm(
+                        buttonTxt: 'Sign in',
+                        authenticationBloc: authenticationBloc,
+                      ),
+                      // 5.heightBox,
+                      15.heightBox,
+                      Align(
+                        alignment: Alignment.center,
+                        child: GestureDetector(
+                          onTap: () {
+                            context.navigateTo(const SignupRoute());
+                          },
+                          child: RichText(
+                            text: TextSpan(
+                              text: "Don't have an account? ",
+                              style: GoogleFonts.poppins(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.grey,
                               ),
-                            ],
+                              children: [
+                                TextSpan(
+                                  text: "Sign Up",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    25.heightBox,
-                    const SigninWithGoogle(),
-                  ],
-                ).p12(),
+                      25.heightBox,
+                      const SigninWithGoogle(),
+                    ],
+                  ).p12(),
+                ),
               ),
-            ),
-          );
-        } else {
-          return Container(); // Fallback for other states
-        }
+              state is AuthLoadingState
+                  ? AlertDialog(
+                      // backgroundColor: Colors.green.withOpacity(0.2),
+                      elevation: 10,
+                      content: const LoadingWidget().h(50),
+                    )
+                  : Container()
+            ],
+          ),
+        );
       },
     );
   }

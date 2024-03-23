@@ -54,7 +54,7 @@ class _SplashViewState extends State<SplashView> {
           log('into the AppSuccessState');
           context.navigateTo(const SigninRoute());
         } else if (state is UserAuthenticatedState) {
-          context.navigateTo(const HomeRoute());
+          context.router.replaceAll([const HomeRoute()]);
         }
       },
     );

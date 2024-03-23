@@ -28,5 +28,5 @@ class OnSignUpEvent extends AuthenticationEvent {
 }
 
 class OnSignOutEvent extends AuthenticationEvent {
-  const OnSignOutEvent();
+
 }

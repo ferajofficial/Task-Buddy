@@ -38,7 +38,11 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return 
+    //  isLoading
+    //     ? const Center(child: CircularProgressIndicator())
+    //     : 
+    Scaffold(
         appBar: AppBar(
           // backgroundColor: Colors.blue,
           centerTitle: false,
@@ -85,9 +89,9 @@ class _HomeViewState extends State<HomeView> {
         // bottomNavigationBar:
         body: SafeArea(
           bottom: false,
-          child: isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : Stack(children: [
+          child: 
+         
+              Stack(children: [
                   SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,

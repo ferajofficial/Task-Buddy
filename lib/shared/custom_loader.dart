@@ -19,9 +19,8 @@ class LoadingView extends StatefulWidget {
 class _LoadingViewState extends State<LoadingView> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        body: Center(
+    return const Center(
       child: CircularProgressIndicator(),
-    ));
+    );
   }
 }

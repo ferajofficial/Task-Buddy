@@ -16,6 +16,7 @@ class AuthenticationBloc
     on<AuthenticationInitialEvent>(_onInitialEvent);
     on<OnSignInEvent>(_onSignIn);
     on<OnSignUpEvent>(_onSignUp);
+    on<OnSignOutEvent>(_onSignOut);
   }
 
 //For SignIn
@@ -28,7 +29,7 @@ class AuthenticationBloc
           await _authenticationRepo.signin(event.email, event.password);
 
       if (result.status == true) {
-        prefs.setString(AppConstatns.userId, '${result.id}');
+        prefs.setString(AppConstants.userId, '${result.id}');
         emit(AuthSuccessState(signInResponseModel: result));
       } else {
         emit(AuthFailureState(
@@ -42,7 +43,7 @@ class AuthenticationBloc
   FutureOr<void> _onInitialEvent(AuthenticationInitialEvent event,
       Emitter<AuthenticationState> emit) async {
     // await Future.delayed(const Duration(seconds: 2));
-    log('emiting loaded state');
+    log('into the Authloaded state');
     emit(AuthLoadedState());
   }
 
@@ -59,9 +60,24 @@ class AuthenticationBloc
           message: result.message ?? 'User already exists',
         ));
       } else if (result.message == 'User signedup successfully') {
-        prefs.setString(AppConstatns.userId, '${result.user?.id}');
+        prefs.setString(AppConstants.userId, '${result.user?.id}');
         emit(AuthSuccessState(signUpResponseModel: result));
       }
-    } catch (e) {}
+    } catch (e) {
+
+    }
+  }
+
+  //For Sign Out
+  FutureOr<void> _onSignOut(
+      OnSignOutEvent event, Emitter<AuthenticationState> emit) async {
+    log('Logging Out..');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // Remove the  stored userID
+    prefs.remove(AppConstants.userId);
+    log('UserId removed');
+    log('Loggedout Successfully');
+    // Emitting initial state to signify logout
+    emit(AuthSignOutState());
   }
 }
