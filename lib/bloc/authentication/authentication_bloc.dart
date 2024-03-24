@@ -63,9 +63,7 @@ class AuthenticationBloc
         prefs.setString(AppConstants.userId, '${result.user?.id}');
         emit(AuthSuccessState(signUpResponseModel: result));
       }
-    } catch (e) {
-
-    }
+    } catch (e) {}
   }
 
   //For Sign Out
@@ -73,11 +71,14 @@ class AuthenticationBloc
       OnSignOutEvent event, Emitter<AuthenticationState> emit) async {
     log('Logging Out..');
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    emit(AuthLoadingState());
     // Remove the  stored userID
     prefs.remove(AppConstants.userId);
     log('UserId removed');
     log('Loggedout Successfully');
     // Emitting initial state to signify logout
+    await Future.delayed(const Duration(seconds: 5));
     emit(AuthSignOutState());
   }
 }

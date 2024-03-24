@@ -8,8 +8,7 @@ import 'package:task_buddy/bloc/authentication/authentication_event.dart';
 import 'package:task_buddy/bloc/authentication/authentication_state.dart';
 import 'package:task_buddy/const/router/router.gr.dart';
 import 'package:task_buddy/features/signin/constants/signin_form.dart';
-import 'package:task_buddy/shared/global_loader.dart';
-import 'package:velocity_x/velocity_x.dart';
+import 'package:task_buddy/shared/global_alert.dart';
 
 @RoutePage()
 class SigninPage extends StatelessWidget {
@@ -68,13 +67,10 @@ class _SigninViewState extends State<SigninView> {
         return Scaffold(
           body: Stack(
             children: [
-              SigninForm(authenticationBloc: authenticationBloc),
-              state is AuthLoadingState
-                  ? AlertDialog(
-                      elevation: 10,
-                      content: const LoadingWidget().h(50),
-                    )
-                  : Container()
+              SignInForm(authenticationBloc: authenticationBloc),
+              state is AuthLoadingState ? const GlobalAlert(
+                loadingText: 'Signing In..',
+              ) : Container()
             ],
           ),
         );

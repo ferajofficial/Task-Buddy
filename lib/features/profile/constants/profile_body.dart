@@ -88,7 +88,6 @@ class ProfileBody extends StatelessWidget {
                   // ---> [ It Performs Logout and redirect to the SignIn Page ]
                   log('LogOut Button Pressed');
                   authenticationBloc.add(OnSignOutEvent());
-                  // context.navigateTo(const SigninRoute());
                 },
               ).p12(),
             ],

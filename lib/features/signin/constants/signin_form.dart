@@ -10,8 +10,8 @@ import 'package:task_buddy/shared/auth_form.dart';
 import 'package:task_buddy/shared/global_font.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class SigninForm extends StatelessWidget {
-  const SigninForm({
+class SignInForm extends StatelessWidget {
+  const SignInForm({
     super.key,
     required this.authenticationBloc,
   });

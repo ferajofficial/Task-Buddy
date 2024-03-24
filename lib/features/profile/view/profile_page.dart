@@ -7,6 +7,7 @@ import 'package:task_buddy/bloc/authentication/authentication_bloc.dart';
 import 'package:task_buddy/bloc/authentication/authentication_state.dart';
 import 'package:task_buddy/const/router/router.gr.dart';
 import 'package:task_buddy/features/profile/constants/profile_body.dart';
+import 'package:task_buddy/shared/global_alert.dart';
 import 'package:task_buddy/shared/global_font.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -54,6 +55,7 @@ class _ProfileViewState extends State<ProfileView> {
           context.router.replaceAll([const SigninRoute()]);
         }
       },
+      buildWhen: (previous, current) => current is! AuthActionState,
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
@@ -84,7 +86,14 @@ class _ProfileViewState extends State<ProfileView> {
               ),
             ],
           ),
-          body: ProfileBody(authenticationBloc: authenticationBloc),
+          body: Stack(children: [
+            ProfileBody(authenticationBloc: authenticationBloc),
+            state is AuthLoadingState
+                ? const GlobalAlert(
+                    loadingText: 'Logging Out..',
+                  )
+                : Container()
+          ]),
         );
       },
     );
