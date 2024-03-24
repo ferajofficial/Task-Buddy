@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:task_buddy/const/router/router.gr.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class CustomNavbar extends StatefulWidget {
-  const CustomNavbar({
+class Navbar extends StatefulWidget {
+  const Navbar({
     Key? key,
     this.onPressed,
   }) : super(key: key);
@@ -12,10 +12,10 @@ class CustomNavbar extends StatefulWidget {
   final VoidCallback? onPressed;
 
   @override
-  State<CustomNavbar> createState() => _CustomNavbarState();
+  State<Navbar> createState() => _NavbarState();
 }
 
-class _CustomNavbarState extends State<CustomNavbar> {
+class _NavbarState extends State<Navbar> {
   int _selectedIndex = 0;
 
   @override

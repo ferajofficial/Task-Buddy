@@ -3,8 +3,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class TaskTiles extends StatelessWidget {
-  const TaskTiles({
+class TaskFields extends StatelessWidget {
+  const TaskFields({
     super.key,
     required this.labelTask,
     required this.hintText,

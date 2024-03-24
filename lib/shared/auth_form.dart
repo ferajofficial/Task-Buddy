@@ -6,20 +6,21 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:task_buddy/bloc/authentication/authentication_bloc.dart';
 import 'package:task_buddy/bloc/authentication/authentication_event.dart';
-import 'package:task_buddy/features/signup/const/signup_keys.dart';
-import 'package:task_buddy/shared/custom_button.dart';
-import 'package:task_buddy/shared/custom_font.dart';
+import 'package:task_buddy/features/signup/constants/signup_keys.dart';
+import 'package:task_buddy/shared/global_font.dart';
+import 'package:task_buddy/shared/global_button.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class CustomForm extends StatefulWidget {
-  const CustomForm({
+class AuthForm extends StatefulWidget {
+  const AuthForm({
     Key? key,
     // Add any additional parameters you need here
     this.isAdditionalTextField = false,
     this.additionalTextFieldName,
     this.additionalTextFieldValidator,
     this.additionalTextFieldDecoration,
-    required this.buttonTxt, required this.authenticationBloc,
+    required this.buttonTxt,
+    required this.authenticationBloc,
     // required this.buttonTxt, required this.onPressed,
   }) : super(key: key);
 
@@ -32,15 +33,12 @@ class CustomForm extends StatefulWidget {
   // final VoidCallback onPressed;
 
   @override
-  State<CustomForm> createState() => _CustomFormState();
+  State<AuthForm> createState() => _AuthFormState();
 }
 
-class _CustomFormState extends State<CustomForm> {
+class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormBuilderState>();
   bool _obscureText = true;
-
-
- 
 
   void _togglePasswordVisibility() {
     setState(() {
@@ -149,12 +147,8 @@ class _CustomFormState extends State<CustomForm> {
             Align(
               alignment: Alignment.centerRight,
               child: GestureDetector(
-                onTap: () {
-                  // context.navigateTo(
-                  //   const ForgotPasswordRoute()
-                  //   );
-                },
-                child: const CustomText(
+                onTap: () {},
+                child: const GlobalText(
                   text: "Forgot Password?",
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
@@ -163,7 +157,7 @@ class _CustomFormState extends State<CustomForm> {
               ),
             ),
           20.heightBox,
-          CustomButton(
+          GlobalButton(
             width: double.infinity,
             height: 50,
             buttonTxt: widget.buttonTxt,
@@ -185,14 +179,14 @@ class _CustomFormState extends State<CustomForm> {
                 } else if (widget.buttonTxt == 'Sign up') {
                   final userName = fields[SignUpFormKeys.name]!.value as String;
                   log(userName);
-                 widget. authenticationBloc.add(
+                  widget.authenticationBloc.add(
                     OnSignUpEvent(
                       userName: userName,
                       email: email,
                       password: password,
                     ),
                   );
-                } 
+                }
               }
             },
           ),

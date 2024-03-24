@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task_buddy/shared/custom_font.dart';
+import 'package:task_buddy/shared/global_font.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class TaskCounts extends StatelessWidget {
@@ -30,9 +30,9 @@ class TaskCounts extends StatelessWidget {
               ]),
           child: Column(
             children: [
-              const CustomText(text: 'Pending Tasks', fontSize: 15),
+              const GlobalText(text: 'Pending Tasks', fontSize: 15),
               35.heightBox,
-              const CustomText(
+              const GlobalText(
                 text: '_________',
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
@@ -59,9 +59,9 @@ class TaskCounts extends StatelessWidget {
               ]),
           child: Column(
             children: [
-              const CustomText(text: 'Completed Tasks', fontSize: 15),
+              const GlobalText(text: 'Completed Tasks', fontSize: 15),
               15.heightBox,
-              const CustomText(
+              const GlobalText(
                 text: '_________',
                 fontSize: 15,
                 fontWeight: FontWeight.w600,

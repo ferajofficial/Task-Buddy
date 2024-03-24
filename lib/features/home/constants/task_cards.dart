@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:task_buddy/shared/custom_font.dart';
+import 'package:task_buddy/shared/global_font.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class TaskCards extends StatefulWidget {
@@ -36,7 +36,7 @@ class _TaskCardsState extends State<TaskCards> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomText(
+              GlobalText(
                 text: widget.taskTitle,
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
@@ -56,7 +56,7 @@ class _TaskCardsState extends State<TaskCards> {
                   }),
             ],
           ),
-          CustomText(
+          GlobalText(
             text: widget.taskDescription!,
             fontSize: 14,
           ),
@@ -77,7 +77,7 @@ class _TaskCardsState extends State<TaskCards> {
                       size: 15,
                     ),
                     5.widthBox,
-                    CustomText(
+                    GlobalText(
                       text: widget.dueDate!,
                       fontSize: 12,
                     ),
@@ -91,7 +91,7 @@ class _TaskCardsState extends State<TaskCards> {
                   color: Colors.blue.withOpacity(0.8),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: CustomText(
+                child: GlobalText(
                   text: widget.priority!,
                   fontSize: 12,
                   fontWeight: FontWeight.w600,

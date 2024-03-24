@@ -3,17 +3,12 @@ import 'dart:developer';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:task_buddy/bloc/authentication/authentication_bloc.dart';
 import 'package:task_buddy/bloc/authentication/authentication_event.dart';
 import 'package:task_buddy/bloc/authentication/authentication_state.dart';
-import 'package:task_buddy/const/resource.dart';
 import 'package:task_buddy/const/router/router.gr.dart';
-import 'package:task_buddy/features/signin/constants/signin_options.dart';
-import 'package:task_buddy/shared/custom_font.dart';
-import 'package:task_buddy/shared/custom_form.dart';
-import 'package:task_buddy/shared/custom_loader.dart';
+import 'package:task_buddy/features/signin/constants/signin_form.dart';
+import 'package:task_buddy/shared/global_loader.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 @RoutePage()
@@ -73,78 +68,9 @@ class _SigninViewState extends State<SigninView> {
         return Scaffold(
           body: Stack(
             children: [
-              SafeArea(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Align(
-                        alignment: Alignment.center,
-                        child: SvgPicture.asset(
-                          R.ASSETS_ILLUSTRATIONS_SIGNIN_SVG,
-                          height: 200,
-                        ),
-                      ),
-                      20.heightBox,
-                      Text(
-                        "Welcome Back!!",
-                        style: GoogleFonts.poppins(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      // 20.heightBox,
-                      const CustomText(
-                        text: "Good to see you again 😅",
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey,
-                      ),
-                      // 10.heightBox,
-                      CustomForm(
-                        buttonTxt: 'Sign in',
-                        authenticationBloc: authenticationBloc,
-                      ),
-                      // 5.heightBox,
-                      15.heightBox,
-                      Align(
-                        alignment: Alignment.center,
-                        child: GestureDetector(
-                          onTap: () {
-                            context.navigateTo(const SignupRoute());
-                          },
-                          child: RichText(
-                            text: TextSpan(
-                              text: "Don't have an account? ",
-                              style: GoogleFonts.poppins(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.grey,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: "Sign Up",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      25.heightBox,
-                      const SigninWithGoogle(),
-                    ],
-                  ).p12(),
-                ),
-              ),
+              SigninForm(authenticationBloc: authenticationBloc),
               state is AuthLoadingState
                   ? AlertDialog(
-                      // backgroundColor: Colors.green.withOpacity(0.2),
                       elevation: 10,
                       content: const LoadingWidget().h(50),
                     )

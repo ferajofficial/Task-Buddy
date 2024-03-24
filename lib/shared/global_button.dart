@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CustomButton extends StatelessWidget {
-  const CustomButton({
+class GlobalButton extends StatelessWidget {
+  const GlobalButton({
     super.key,
     required this.width,
     required this.height,

@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CustomText extends StatelessWidget {
+class GlobalText extends StatelessWidget {
   final String text;
   final Color? color;
   final Color? secondaryColor;
@@ -19,7 +19,7 @@ class CustomText extends StatelessWidget {
   final int? maxlines;
   final TextOverflow overflow;
 
-  const CustomText({
+  const GlobalText({
     Key? key,
     required this.text,
     this.color,
@@ -34,8 +34,8 @@ class CustomText extends StatelessWidget {
     this.decorationStyle,
     this.overflow = TextOverflow.clip,
     this.isSecondaryFont = false,
-    this.maxlines, this.decoration,
-
+    this.maxlines,
+    this.decoration,
   }) : super(key: key);
 
   @override
